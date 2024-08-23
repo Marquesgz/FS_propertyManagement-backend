@@ -4,10 +4,10 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//Endpoint to add a new property
     app.use(bodyParser.json());
     const properties = [];
 
+//Endpoint to add a new property
     app.post("/properties", (req, res) => {
         const {name, units} = req.body;
     if (!name || !units) {
@@ -16,3 +16,4 @@ const PORT = process.env.PORT || 3000;
     properties.push({name, units});
     res.status(201).json({message: "Property added successfully." });
     });
+
