@@ -28,3 +28,13 @@ const PORT = process.env.PORT || 3000;
         properties.splice(index, 1);
     res.status(200).json({ message: "Property deleted succssfully."});
     });
+
+//Endpoint to fetch all properties
+    app.get("/properties", (req, res) => {
+        const sortedProperties = properties.sort((a, b) => a.name.localeCompare(b.name));
+        res.status(200).json({ properties: sortedProperties});
+    });
+
+    app.listen(PORT, () => {
+        console.log("Server runnig on http://localhost:${PORT}");
+    });
