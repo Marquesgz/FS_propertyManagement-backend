@@ -11,8 +11,9 @@ Setup
     Start the server: node server.js
 
 Server runs on http://localhost:3000.
-Endpoints
 
+    Endpoints:
+    
     Add Property:
     POST /properties
 
