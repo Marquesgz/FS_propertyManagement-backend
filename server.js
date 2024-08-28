@@ -14,9 +14,8 @@ const PORT = process.env.PORT || 3000;
 //Endpoint to add a new property
     app.post("/properties", (req, res) => {
         const {name, units} = req.body;
-
         const validUnits = ["kitchen", "bathroom", "bedroom", "living-room"];
-        const isValid = units.every((unit) => validUnits.includes(unit) && typeof unit === "string");
+        const isValid = units.every((unit) => validUnits.includes(unit.type) && Number.isInteger(unit.count) && unit.count > 0);
 
         if (!name || !isValid) {
         return res.status(400).json({ error: "Invalid property name or units"});
