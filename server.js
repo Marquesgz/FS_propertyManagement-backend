@@ -14,8 +14,9 @@ const PORT = process.env.PORT || 3000;
 //Endpoint to add a new property
     app.post("/properties", (req, res) => {
         const {name, units} = req.body;
+
         const validUnits = ["kitchen", "bathroom", "bedroom", "living-room"];
-        const isValid = units.every((unit) => validUnits.includes(unit.type) && Number.isInteger(unit.count) && unit.count > 0);
+        const isValid = units.every((unit) => validUnits.includes(unit) && typeof unit === "string");
 
         if (!name || !isValid) {
         return res.status(400).json({ error: "Invalid property name or units"});
@@ -59,7 +60,7 @@ app.delete('/properties', (req, res) => {
             }
         }
 
-        const sortedProperties = properties.sort((a, b) => a.name.localeCompare(b.name));
+        const sortedProperties = filteredPropertiesproperties.sort((a, b) => a.name.localeCompare(b.name));
         res.status(200).json({ properties: sortedProperties});
     });
 
