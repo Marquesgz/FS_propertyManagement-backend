@@ -53,7 +53,10 @@ app.delete('/properties', (req, res) => {
             bedrooms = parseInt(bedrooms, 10);
             if (!isNaN(bedrooms)) {
                 filteredProperties = properties.filter(property => {
-                    const bedroomCount = property.units.filter(unit => unit === "bedroom").length;
+                
+                    const bedroomCount = property.units.reduce((count, unit) => {
+                        return unit.type === "bedroom" ? count + unit.count : count;
+                    }, 0);
                     return bedroomCount === bedrooms;
                 });
             }
