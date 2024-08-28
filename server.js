@@ -46,6 +46,19 @@ app.delete('/properties', (req, res) => {
 
 //Endpoint to fetch all properties
     app.get("/properties", (req, res) => {
+        let { bedrooms} = req.query;
+        let filteredProperties = properties;
+
+        if (bedrooms) {
+            bedrooms = parseInt(bedrooms, 10);
+            if (!isNaN(bedrooms)) {
+                filteredProperties = properties.filter(property => {
+                    const bedroomCount = property.units.filter(unit => unit === "bedroom").length;
+                    return bedroomCount === bedrooms;
+                });
+            }
+        }
+
         const sortedProperties = properties.sort((a, b) => a.name.localeCompare(b.name));
         res.status(200).json({ properties: sortedProperties});
     });
